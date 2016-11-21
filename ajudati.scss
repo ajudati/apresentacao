@@ -1,0 +1,71 @@
+#blz{
+  background:blue;
+  display:inline-block;
+}
+.slide{
+  display: none;
+  position:absolute;
+}
+body{
+  font-family:Lato;
+  margin:0;
+}
+html,body{
+  overflow:hidden;
+}
+html,body,.slide{
+  width:100%;
+  height:100%;
+}
+
+$color-problema: #c0ade3;
+#slide-problema{
+  color:$color-problema;
+  .center{
+    text-align:center;
+  }
+  .title{
+    position: absolute;
+    top: 0px;
+    width: 100%;
+  }
+  .line-title{
+    width:150px;
+    height:2px;
+    background-color:$color-problema;
+    top: 50px;
+  }
+  .circle{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    box-shadow:0px 0px 5px $color-problema;
+    border:2px solid $color-problema;
+  }
+  .line{
+    background-color:$color-problema;
+  }
+  .line-horizontal{
+    height:2px;
+  }
+  .line-vertical{
+    width:2px;
+  }
+  .line-small{
+    height:30px;
+  }
+  .line-backbone{
+    height:2px;
+    width:100%;
+  }
+  #line-disponibilidade{
+
+  }
+  .desenho{
+    padding:10px;
+    display: flex;
+  }
+}
+h1{
+  font-weight:300;
+}

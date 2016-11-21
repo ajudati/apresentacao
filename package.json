@@ -1,0 +1,22 @@
+{
+  "name": "ajudati",
+  "version": "1.0.0",
+  "description": "Apresentação AjudaTI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anderson Tavares",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/greensock": "^1.15.30",
+    "browser-sync": "^2.18.2",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-typescript": "^3.1.3",
+    "typescript": "^2.0.10"
+  },
+  "dependencies": {
+    "gsap": "^1.19.0"
+  }
+}
