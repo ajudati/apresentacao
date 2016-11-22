@@ -1,7 +1,7 @@
 function init(){
   enum ATISlides{
     Problema = 0,
-    Mercado,
+    Mercado = 1,
     Domestico,
     PublicoAlvo,
     Solucoes,
@@ -32,41 +32,183 @@ function init(){
   // Preenchendo as timelines de cada slide
   for (var i = ATISlides.Obrigado; i >= 0; i--) {
     slidesTL[i] = new TimelineMax();
-    tl.add(slidesTL[i]);
+    //tl.add(slidesTL[i]);
     slidesTags[i] = document.getElementById(`slide-${slidesnames[i]}`);
   }
 
   // PROBLEMAS ============================================================
   let sProblema = slidesTL[ATISlides.Problema];
   let tProblema = slidesTags[ATISlides.Problema];
+  let fxProblemaCircle:Object = {scale:0.1,opacity:0,ease:Elastic.easeOut.config(1,0.3)};
   sProblema.to(body,0.5,{backgroundColor:'#2a1948'});
   sProblema.to(tProblema,0,{immediateRender:false,css:{display:'block'}});
   sProblema.from("#title-problema-text",0.75,{css:{opacity:0,marginTop:'-50px'}});
   sProblema.from("#line-title-problema .line",0.75,{css:{width:'0px'}});
   sProblema.from("#line-backbone",1,{css:{width:'0%'}},1);
-  sProblema.from("#circle-disponibilidade", 0.5, {opacity:0});
-  sProblema.from("#circle-seguranca"      , 0.5, {opacity:0});
-  sProblema.from("#circle-comodidade"     , 0.5, {opacity:0});
-  sProblema.from("#circle-usabilidade"     , 0.5, {opacity:0});
-
-  
+  sProblema.from("#circle-disponibilidade", 0.5, fxProblemaCircle);
+  sProblema.from("#circle-seguranca"      , 0.5, fxProblemaCircle);
+  sProblema.from("#circle-comodidade"     , 0.5, fxProblemaCircle);
+  sProblema.from("#circle-usabilidade"    , 0.5, fxProblemaCircle);
+  tl.add(sProblema);
 
   // MERCADO ==============================================================
+  let sMercado = slidesTL[ATISlides.Mercado];
+  let tMercado = slidesTags[ATISlides.Mercado];
+  // out previous
+  sMercado.to("#line-title-problema .line",0.75,{css:{width:'0px'}},0.5);
+  sMercado.to("#title-problema-text",0.75,{css:{opacity:0,marginTop:'-50px'}},0.5);
+  fxProblemaCircle = {scale:0.1,opacity:0,ease:Power2.easeOut};
+  sMercado.to("#circle-disponibilidade", 0.5, fxProblemaCircle, 0.5);
+  sMercado.to("#circle-seguranca"      , 0.5, fxProblemaCircle, 0.5);
+  sMercado.to("#circle-comodidade"     , 0.5, fxProblemaCircle, 0.5);
+  sMercado.to("#circle-usabilidade"    , 0.5, fxProblemaCircle, 0.5);
+  sMercado.to("#line-backbone",1,{css:{opacity:'0'}},0.75);
+  
+  // in current
+  sMercado.to(tMercado,0,{immediateRender:false,css:{display:'block'}},0.75);
+  sMercado.to(body,0.5,{backgroundColor:'#0d4f08'},0.75);
+  sMercado.from("#title-mercado-text",0.75,{css:{opacity:0,marginTop:'-50px'}});
+  sMercado.from("#line-title-mercado .line",0.75,{css:{width:'0px'}});
+  sMercado.from('#content-mercado',0.5,{opacity:0},1);
+  sMercado.from('#content-mercado-middle',0.5,{opacity:'0'},1);
+  sMercado.from('#content-mercado-middle',0.5,{height:'0px'},1.5);
+  tl.add(sMercado);
+
   // DOMÉSTICO ============================================================
+  let sDomestico = slidesTL[ATISlides.Domestico];
+  let tDomestico = slidesTags[ATISlides.Domestico];
+  // out previous
+  sDomestico.to("#title-mercado-text",0.75,{css:{opacity:0,marginTop:'-50px'}},0.5);
+  sDomestico.to("#line-title-mercado .line",0.75,{css:{width:'0px'}},0.5);
+  sDomestico.to('#content-mercado-middle',0.5,{height:'0px'},1);
+  sDomestico.to('#content-mercado',0.5,{opacity:0},1.6);
+  sDomestico.to(tMercado,0,{immediateRender:false,css:{display:'none'}});
+  // in current
+  sDomestico.to(tDomestico,0,{immediateRender:false,css:{display:'block'}});
+  sDomestico.to(body,0.5,{backgroundColor:'#080b4f'},0.75);
+  sDomestico.from("#title-domestico-text",0.75,{css:{marginLeft:'-50px',opacity:0}});
+  sDomestico.from("#line-title-domestico .line",0.75,{css:{width:'0px'}});
+  sDomestico.from("#content-domestico-left",0.75,{opacity:0},"-=0.2");
+  sDomestico.from("#content-domestico-empresarial .topic h1",0.75,{css:{marginLeft:'-170px'}});
+  sDomestico.from("#content-domestico-shadow1",0.75,{left:body.clientWidth},2.5);
+  sDomestico.from("#content-domestico-shadow2",0.75,{left:body.clientWidth+30},2.5);
+  sDomestico.from("#content-domestico-domestico .icon",0.75,{css:{opacity:0}});
+  sDomestico.from("#content-domestico-domestico .topic h1",0.75,{css:{marginLeft:'-170px'}});
+  
+  
+  tl.add(sDomestico);
+
   // PÚBLICO ALVO =========================================================
+  let sPublicoAlvo = slidesTL[ATISlides.PublicoAlvo];
+  let tPublicoAlvo = slidesTags[ATISlides.PublicoAlvo];
+  // out previous
+  sPublicoAlvo.to("#line-title-domestico .line",0.75,{css:{width:'0px'}},0.5);
+  sPublicoAlvo.to("#title-domestico-text",0.75,{css:{opacity:0,marginLeft:'-50px'}},0.75);
+  sPublicoAlvo.to("#content-domestico-shadow1",0.75,{left:body.clientWidth},1);
+  sPublicoAlvo.to("#content-domestico-shadow2",0.75,{left:body.clientWidth+30},1);
+  sPublicoAlvo.to("#content-domestico",0.5,{opacity:0},1);
+  sPublicoAlvo.to(tDomestico,0,{immediateRender:false,css:{display:'none'}});
+  // in current
+  sPublicoAlvo.to(tPublicoAlvo,0,{immediateRender:false,css:{display:'block'}});
+  sPublicoAlvo.to(body,0.5,{backgroundColor:'#4f164c'},1.25);
+  sPublicoAlvo.from("#title-publicoalvo-text",0.75,{css:{opacity:0,marginLeft:'-50px'}});
+  sPublicoAlvo.from("#line-title-publicoalvo .line",0.75,{css:{width:'0px'}});
+  sPublicoAlvo.from("#content-publicoalvo-left",0.75,{opacity:0, scale:0.1, ease:Elastic.easeOut.config(1,0.3)});
+  sPublicoAlvo.from("#content-publicoalvo-right",0.75,{opacity:0, scale:0.1, ease:Elastic.easeOut.config(1,0.3)});
+  tl.add(sPublicoAlvo);
+
+  
   // SOLUÇÕES =============================================================
+  let sSolucoes = slidesTL[ATISlides.Solucoes];
+  let tSolucoes = slidesTags[ATISlides.Solucoes];
+  // out previous
+  //sSolucoes.to("#content-publicoalvo",0.75,{opacity:0, scaleY:0});
+  sSolucoes.to("#content-publicoalvo-left",0.75,{opacity:0, scale:0.1, ease:Elastic.easeIn.config(1,0.3)});
+  sSolucoes.to("#content-publicoalvo-right",0.75,{opacity:0, scale:0.1, ease:Elastic.easeIn.config(1,0.3)},0);
+  sSolucoes.to("#line-title-publicoalvo .line",0.75,{css:{width:'0px'}},0);
+  sSolucoes.to("#title-publicoalvo-text",0.75,{css:{opacity:0,marginLeft:'-50px'}},0.5);
+  sSolucoes.to(tPublicoAlvo,0,{immediateRender:false,css:{display:'none'}});
+  // in current
+  sSolucoes.to(body,0.5,{backgroundColor:'#333333'},1.25);
+  sSolucoes.to(tSolucoes,0,{immediateRender:false,css:{display:'block'}});
+  sSolucoes.from("#title-solucoes-text",0.75,{css:{opacity:0,marginTop:'-50px'}});
+  sSolucoes.from("#line-title-solucoes .line",0.75,{css:{width:'0px'}});
+
+  tl.seek(24);
+  
+  tl.add(sSolucoes);
   // REDES SOCIAIS ========================================================
+  let sRedesSociais = slidesTL[ATISlides.RedesSociais];
+  let tRedesSociais = slidesTags[ATISlides.RedesSociais];
+  // out previous
+  // in current
+  tl.add(sRedesSociais);
   // QUALIDADES ===========================================================
+  let sQualidades = slidesTL[ATISlides.Qualidades];
+  let tQualidades = slidesTags[ATISlides.Qualidades];
+  // out previous
+  // in current
+  tl.add(sQualidades);
   // AJUDATI ==============================================================
+  let sAjudaTI = slidesTL[ATISlides.AjudaTI];
+  let tAjudaTI = slidesTags[ATISlides.AjudaTI];
+  // out previous
+  // in current
+  tl.add(sAjudaTI);
   // GERENCIAR CHAMADOS ===================================================
+  let sGerenciarChamados = slidesTL[ATISlides.GerenciarChamados];
+  let tGerenciarChamados = slidesTags[ATISlides.GerenciarChamados];
+  // out previous
+  // in current
+  tl.add(sGerenciarChamados);
   // PROCURAR AJUDANTES ===================================================
+  let sProcurarAjudantes = slidesTL[ATISlides.ProcurarAjudantes];
+  let tProcurarAjudantes = slidesTags[ATISlides.ProcurarAjudantes];
+  // out previous
+  // in current
+  tl.add(sProcurarAjudantes);
   // PROCURAR SERVIÇO =====================================================
+  let sProcurarServico = slidesTL[ATISlides.ProcurarServico];
+  let tProcurarServico = slidesTags[ATISlides.ProcurarServico];
+  // out previous
+  // in current
+  tl.add(sProcurarServico);
   // CONVERSAÇÃO ==========================================================
+  let sConversacao = slidesTL[ATISlides.Conversacao];
+  let tConversacao = slidesTags[ATISlides.Conversacao];
+  // out previous
+  // in current
+  tl.add(sConversacao);
   // DIFERENCIAIS =========================================================
+  let sDiferenciais = slidesTL[ATISlides.Diferenciais];
+  let tDiferenciais = slidesTags[ATISlides.Diferenciais];
+  // out previous
+  // in current
+  tl.add(sDiferenciais);
   // MODELO DE NEGÓCIO ====================================================
+  let sModeloNegocio = slidesTL[ATISlides.ModeloNegocio];
+  let tModeloNegocio = slidesTags[ATISlides.ModeloNegocio];
+  // out previous
+  // in current
+  tl.add(sModeloNegocio);
   // INOVAÇÃO =============================================================
+  let sInovacao = slidesTL[ATISlides.Inovacao];
+  let tInovacao = slidesTags[ATISlides.Inovacao];
+  // out previous
+  // in current
+  tl.add(sInovacao);
   // EQUIPE ===============================================================
+  let sEquipe = slidesTL[ATISlides.Equipe];
+  let tEquipe = slidesTags[ATISlides.Equipe];
+  // out previous
+  // in current
+  tl.add(sEquipe);
   // OBRIGADO =============================================================
+  let sObrigado = slidesTL[ATISlides.Obrigado];
+  let tObrigado = slidesTags[ATISlides.Obrigado];
+  // out previous
+  // in current
+  tl.add(sObrigado);
 
 
   // var element:HTMLElement = document.getElementById('blz');
