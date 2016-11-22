@@ -41,8 +41,15 @@ function init(){
   let tProblema = slidesTags[ATISlides.Problema];
   sProblema.to(body,0.5,{backgroundColor:'#2a1948'});
   sProblema.to(tProblema,0,{immediateRender:false,css:{display:'block'}});
-  sProblema.from("#slide-problema .title",1,{css:{opacity:0,top:'-50px'}});
-  sProblema.from("#slide-problema .linetitle",1,{css:{width:'0'}},0);
+  sProblema.from("#title-problema-text",0.75,{css:{opacity:0,marginTop:'-50px'}});
+  sProblema.from("#line-title-problema .line",0.75,{css:{width:'0px'}});
+  sProblema.from("#line-backbone",1,{css:{width:'0%'}},1);
+  sProblema.from("#circle-disponibilidade", 0.5, {opacity:0});
+  sProblema.from("#circle-seguranca"      , 0.5, {opacity:0});
+  sProblema.from("#circle-comodidade"     , 0.5, {opacity:0});
+  sProblema.from("#circle-usabilidade"     , 0.5, {opacity:0});
+
+  
 
   // MERCADO ==============================================================
   // DOMÉSTICO ============================================================
