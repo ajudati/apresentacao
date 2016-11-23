@@ -1,24 +1,82 @@
-function init(){
-  enum ATISlides{
-    Problema = 0,
-    Mercado = 1,
-    Domestico,
-    PublicoAlvo,
-    Solucoes,
-    RedesSociais,
-    Qualidades,
-    AjudaTI,
-    GerenciarChamados,
-    ProcurarAjudantes,
-    ProcurarServico,
-    Conversacao,
-    Diferenciais,
-    ModeloNegocio,
-    Inovacao,
-    Equipe,
-    Obrigado
-  }
+enum ATISlides{
+  Problema = 0,
+  Mercado = 1,
+  Domestico,
+  PublicoAlvo,
+  Solucoes,
+  RedesSociais,
+  Qualidades,
+  AjudaTI,
+  GerenciarChamados,
+  ProcurarAjudantes,
+  ProcurarServico,
+  Conversacao,
+  Diferenciais,
+  ModeloNegocio,
+  Inovacao,
+  Equipe,
+  Obrigado
+}
+interface TweenDeckOptions{
+  allowSkip:boolean;
+}
+class TweenDeck{
+  private positions:Array<number>;
+  private positionIndex:number;
+  private timeScale:number;
+  private options:TweenDeckOptions;
+  private tl:TimelineMax;
+  constructor(tl:TimelineMax, options:TweenDeckOptions={allowSkip:true}){
+    this.positionIndex = 1;
+    this.timeScale     = 0;
+    this.tl            = tl;
+    this.options       = options;
+    this.positions     = (<TimelineMax[]>tl.getChildren(false)).map(timeline=>timeline.startTime());
+    this.positions.push(tl.duration());
 
+    document.addEventListener('keydown', (e)=>{
+      console.log(e.keyCode);
+      // down/right arrow, pagedown, space = play forward
+      if ((e.keyCode === 34 || e.keyCode === 39 || e.keyCode === 32 || e.keyCode === 40) && this.positionIndex < this.positions.length) {
+        this.next();
+      }
+      // up/left arrow, pageup = rewind
+      else if ((e.keyCode === 33 || e.keyCode === 37 || e.keyCode === 38) && this.positionIndex > 1) {
+        this.prev();
+      }else if(e.keyCode === 36){
+        //this.tl.tweenTo(this.positions[1]).timeScale(10);
+        this.tl.seek(this.positions[0]);
+        tl.tweenTo(this.positions[1]);
+      }else if(e.keyCode === 35){
+        this.tl.seek(this.positions[this.positions.length-1]);
+        tl.tweenTo(this.positions[this.positions.length-1]);
+        //this.tl.tweenTo(this.positions[this.positions.length-1]).timeScale(10);
+      }
+    });
+  }
+  next(){
+    this.tweenTo(this.positionIndex+1);
+  }
+  prev(){
+    this.tweenTo(this.positionIndex-1);
+  }
+  // Move the playhead to the appropriate position (based on the index)
+  tweenTo(i) {
+    if (this.options.allowSkip) {
+      this.timeScale++; //speed up if the user keeps pushing the button.
+    } else if (this.timeScale !== 0) {
+      // If the timeScale isn't 0, that means we're mid-tween, and since allowSkip is false, we should ignore the request.
+      return;
+    } else {
+      this.timeScale = 1;
+    }
+    this.positionIndex = i;
+    // Tween the "time" (playhead) to the new position using a linear ease. We could have used timeline.tweenTo() if we knew the timeline would always be a TimelineMax, but this code makes it compatible with TimelineLite too.
+    TweenLite.to(this.tl, Math.abs(this.positions[i] - this.tl.time()), {time:this.positions[i], ease:Linear.easeNone, onComplete:()=>this.timeScale = 0}).timeScale(this.timeScale);
+  } 
+}
+
+function init(){
   let slidesnames:string[] = ["problema", "mercado", "domestico", "publicoalvo", 
                               "solucoes", "redessociais", "qualidades", "ajudati", 
                               "gerenciarchamados", "procurarajudantes", "procurarservico", 
@@ -63,6 +121,7 @@ function init(){
   sMercado.to("#circle-comodidade"     , 0.5, fxProblemaCircle, 0.5);
   sMercado.to("#circle-usabilidade"    , 0.5, fxProblemaCircle, 0.5);
   sMercado.to("#line-backbone",1,{css:{opacity:'0'}},0.75);
+  sMercado.to(tProblema,0,{immediateRender:false,css:{display:'none'}});
   
   // in current
   sMercado.to(tMercado,0,{immediateRender:false,css:{display:'block'}},0.75);
@@ -133,16 +192,31 @@ function init(){
   sSolucoes.to(tSolucoes,0,{immediateRender:false,css:{display:'block'}});
   sSolucoes.from("#title-solucoes-text",0.75,{css:{opacity:0,marginTop:'-50px'}});
   sSolucoes.from("#line-title-solucoes .line",0.75,{css:{width:'0px'}});
-
-  tl.seek(24);
+  sSolucoes.from("#content-solucoes-shadow1",0.75,{opacity:0},1.5);
+  sSolucoes.from("#solucoes-logos img",3,{css:{marginBottom:'-21vw'}},2);
+  sSolucoes.from("#content-solucoes .mirror img",3,{css:{marginBottom:'-20vw',webkitMaskPosition:"0px -14.5vw"}},"-=3");
+  sSolucoes.from("#solucoes-problemas",0.75,{opacity:0});
   
   tl.add(sSolucoes);
   // REDES SOCIAIS ========================================================
   let sRedesSociais = slidesTL[ATISlides.RedesSociais];
   let tRedesSociais = slidesTags[ATISlides.RedesSociais];
   // out previous
+  sRedesSociais.to("#solucoes-problemas",0.75,{opacity:0},0);
+  sRedesSociais.to("#content-solucoes .mirror img",3,{css:{marginBottom:'-20vw',webkitMaskPosition:"0px -14.5vw"}},0.75);
+  sRedesSociais.to("#solucoes-logos img",3,{css:{marginBottom:'-21vw'}},0.75);
+  sRedesSociais.to("#content-solucoes-shadow1",0.75,{opacity:0},2.3);
+  sRedesSociais.to("#line-title-solucoes .line",0.75,{css:{width:'0px'}},1.3);
+  sRedesSociais.to("#title-solucoes-text",0.75,{css:{opacity:0,marginTop:'-50px'}},1.6);
+  sRedesSociais.to("#subtitle-solucoes-text",0.75,{css:{opacity:0}},1.6);
+  sRedesSociais.to(tSolucoes,0,{immediateRender:false,css:{display:'none'}});
   // in current
+  sRedesSociais.to(body,0.5,{backgroundColor:'#660000'},3);
+  sRedesSociais.to(tRedesSociais,0,{immediateRender:false,css:{display:'block'}});
   tl.add(sRedesSociais);
+
+  tl.seek(24);
+  
   // QUALIDADES ===========================================================
   let sQualidades = slidesTL[ATISlides.Qualidades];
   let tQualidades = slidesTags[ATISlides.Qualidades];
@@ -209,6 +283,8 @@ function init(){
   // out previous
   // in current
   tl.add(sObrigado);
+
+  var td = new TweenDeck(tl);
 
 
   // var element:HTMLElement = document.getElementById('blz');
