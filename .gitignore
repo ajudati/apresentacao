@@ -40,3 +40,4 @@ jspm_packages
 ajudati.js
 dist/
 *.sh
+*.gz

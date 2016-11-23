@@ -1,3 +1,10 @@
+@mixin title_line($name,$size){
+  ##{$name}{
+    width:$size;
+    & > .line{width:$size;}  
+  }
+}
+
 .slide{
   display: none;
   position:absolute;
@@ -84,6 +91,30 @@ h1,h2{
   top:0px;
   left:0px;
 }
+.line-left{
+  left: 20px;
+}
+.line-top{
+  top: 80px;
+}
+.line-top-sub{
+  top: 100px;
+}
+.pos-abs{
+  position: absolute;
+}
+.line-right{
+  right: 20px;
+}
+
+$sections:problema,mercado,domestico,publicoalvo, solucoes, redessociais, qualidades, ajudati, gerenciarchamados, procurarajudantes, procurarservico, conversacao, diferenciais, modelonegocio, inovacao, equipe, obrigado;
+$title-line-widths: 180, 180, 130, 170, 130, 130, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170; 
+
+// Incluindo todas as linhas
+@for $i from 1 through length($sections){
+ @include title_line(line-title-#{nth($sections,$i)}, #{nth($title-line-widths,$i)}px);
+}
+
 // PROBLEMA ===============================
 $color-problema: #c0ade3;
 #slide-problema{
@@ -134,16 +165,12 @@ $color-problema: #c0ade3;
 }
 
 #line-title-problema{
-  width: 180px;
   position:absolute;
   // margin-left:-90px;
   top:80px;
   display: flex;
   align-items:center;
   justify-content:center;
-  .line{
-    width:180px;
-  }
 }
 #title-problema-text{
   margin-top:20px;
@@ -206,16 +233,12 @@ $color-mercado: white;
   
 }
 #line-title-mercado{
-  width:180px;
   position:absolute;
   // margin-left:-90px;
   top:80px;
   display: flex;
   align-items:center;
   justify-content:center;
-  .line{
-    width:180px;
-  }
 }
 
 // DOMESTICO ===============================
@@ -284,32 +307,14 @@ $color-domestico: #a1a5f6;
   }
 }
 #line-title-domestico{
-  width:130px;
   position:absolute;
   left: 20px;
   top:80px;
   display: flex;
   align-items:center;
   justify-content:center;
-  .line{
-    width:130px;
-  }
 }
-.line-left{
-  left: 20px;
-}
-.line-top{
-  top: 80px;
-}
-.line-top-sub{
-  top: 100px;
-}
-.line-abs{
-  position: absolute;
-}
-.pos-abs{
-  position: absolute;
-}
+
 
 // PUBLICOALVO ===============================
 $color-publicoalvo: #dc7ad7;
@@ -359,11 +364,6 @@ $color-publicoalvo: #dc7ad7;
     width: 850px;
     justify-content: space-between;
   }
-}
-$line-width:170px;
-#line-title-publicoalvo{
-  width:$line-width;
-  .line{width:$line-width;}
 }
 .fcenter{
   display: flex;
@@ -439,8 +439,10 @@ $color-solucoes: #cdcdcd;
     }
   }
 }
-$line-width:130px;
-#line-title-solucoes{
-  width:$line-width;
-  .line{width:$line-width;}
+
+// REDESSOCIAIS ===============================
+$color-redessociais: #ff9a9a;
+#slide-redessociais{
+  color: $color-redessociais;
 }
+
