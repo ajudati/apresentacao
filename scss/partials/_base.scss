@@ -1,0 +1,22 @@
+@import "compass";
+
+// Font weights
+$light: 300;
+$regular: 500;
+$bold: 700;
+
+// Base Font
+$base-font-family: Lato, sans-serif;
+$base-font-weight: $light;
+$base-font-size: 32px;
+$base-line-height: 1.4;
+
+// Fixed Font
+$fixed-font-family: monospace;
+$fixed-font-size: 85%;
+$fixed-line-height: $base-line-height;
+
+// Headings
+$header-font-weight: $regular;
+
+@import "modules/all";
