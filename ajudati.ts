@@ -33,6 +33,7 @@ class TweenDeck{
     this.options       = options;
     this.positions     = (<TimelineMax[]>tl.getChildren(false)).map(timeline=>timeline.startTime());
     this.positions.push(tl.duration());
+    tl.tweenTo(this.positions[1]);
 
     document.addEventListener('keydown', (e)=>{
       console.log(e.keyCode);
@@ -93,7 +94,8 @@ function init(){
     //tl.add(slidesTL[i]);
     slidesTags[i] = document.getElementById(`slide-${slidesnames[i]}`);
   }
-
+  // VAZIO ============================================================
+  tl.add(new TimelineMax());
   // PROBLEMAS ============================================================
   let sProblema = slidesTL[ATISlides.Problema];
   let tProblema = slidesTags[ATISlides.Problema];
@@ -215,7 +217,7 @@ function init(){
   sRedesSociais.to(tRedesSociais,0,{immediateRender:false,css:{display:'block'}});
   tl.add(sRedesSociais);
 
-  tl.seek(24);
+  // tl.seek(24);
   
   // QUALIDADES ===========================================================
   let sQualidades = slidesTL[ATISlides.Qualidades];
