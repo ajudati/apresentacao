@@ -20,5 +20,16 @@ enum ATISlides{
   Equipe,
   Obrigado
 }
-var algo = new TweenDeck(new TimelineMax());
-console.log(algo);
+interface Slide{
+  name:string;
+  play();
+}
+
+let slideProblemas:Slide = {name:"problemas",play:()=>{
+  
+}};
+
+var tl:TimelineMax = new TimelineMax();
+var algo = new TweenDeck(tl);
+tl.from("section",1,{opacity:0});
+tl.play();

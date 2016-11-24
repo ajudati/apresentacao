@@ -1,0 +1,7 @@
+@import '../modules/colors';
+$slides-names:problema,mercado,domestico,publicoalvo, solucoes, redessociais, qualidades, ajudati, gerenciarchamados, procurarajudantes, procurarservico, conversacao, diferenciais, modelonegocio, inovacao, equipe, obrigado;
+$slides-title-widths: 180, 180, 130, 170, 130, 130, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170; 
+$slides-bg:$dark-purple, $green, $blue, $dark-pink, $dark-grey, $dark-red, $purple, $purple, $dark-yellow, $green, $sky-blue, $pale-pink, $purple, $green, $dark-red, $dark-grey, $purple;
+@for $i from 1 through length($slides-bg){
+	$bg:nth($slides-bg, $i);
+}
