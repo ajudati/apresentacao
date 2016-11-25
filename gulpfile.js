@@ -3,6 +3,7 @@ var browserSync = require('browser-sync').create();
 // var sass        = require('gulp-sass');
 var ts          = require('gulp-typescript');
 var compass     = require('gulp-compass');
+var rename      = require('gulp-rename');
 var rollup      = require('gulp-rollup');
 var uglify      = require('gulp-uglify');
 var uglifyjs    = require('uglify-js-harmony');
@@ -21,7 +22,7 @@ gulp.task('serve',['ts','bundle','compass'], function() {
     });
     //gulp.watch("scss/*.scss", ['sass']);
     gulp.watch("scss/**/*.scss",['compass']);
-    gulp.watch("ts/*.ts", ['ts','bundle']);
+    gulp.watch("ts/*.ts", ['bundle']);
     gulp.watch("*.html").on('change', browserSync.reload);
     gulp.watch("js/*.js").on('change', browserSync.reload);
     gulp.watch("css/*.js").on('change', browserSync.reload);
@@ -39,8 +40,7 @@ gulp.task('serve',['ts','bundle','compass'], function() {
 gulp.task('ts', function() {
     return gulp.src("ts/*.ts")
         .pipe(tsProject())
-        .pipe(gulp.dest("js"))
-        .pipe(browserSync.stream());
+        .pipe(gulp.dest("js/tmp"));
 });
 
 gulp.task('compass', function() {
@@ -49,7 +49,7 @@ gulp.task('compass', function() {
       config_file: './config.rb',
       css: 'css',
       sass: 'scss'
-    }))
+    }).on('error',e=>console.log(e)))
     .pipe(gulp.dest('css'))
     .pipe(browserSync.stream());
 });
@@ -68,9 +68,10 @@ gulp.task('compress', function (cb) {
 });
 
 gulp.task('bundle',['ts'], function() {
-  gulp.src('js/*.js')
+  gulp.src('js/tmp/*.js')
     // transform the files here.
-    .pipe(rollup({entry:'./js/ajudati2.js'}))
+    .pipe(rollup({entry:'js/tmp/ajudati.js'}))
+    .pipe(rename("ajudati.js"))
     .pipe(gulp.dest('js'));
 });
 

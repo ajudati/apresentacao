@@ -1,0 +1,18 @@
+.problema-circle{
+  width:16vmin;
+  height:16vmin;
+  @extend .flex, .acenter, .jcenter;
+}
+.problema-item-line{
+  height:40px;
+}
+.problema-item{
+  @extend .grow, .flex, .col, .acenter;
+  img{
+    transform:scale(0.5vh);
+  }
+}
+.problema-items{
+  padding-left: 10px;
+  padding-right: 10px;
+}
