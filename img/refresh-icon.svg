@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- The icon can be used freely in both personal and commercial projects with no attribution required, but always appreciated. 
+You may NOT sub-license, resell, rent, redistribute or otherwise transfer the icon without express written permission from iconmonstr.com -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   x="0px"
+   y="0px"
+   width="38.623344"
+   height="30.296638"
+   viewBox="0 0 38.623343 30.296638"
+   enable-background="new 0 0 512 512"
+   xml:space="preserve"
+   id="svg7576"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="refresh-icon.svg"><metadata
+     id="metadata7583"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+     id="defs7581" /><sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="454"
+     inkscape:window-height="736"
+     id="namedview7579"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="3.6875"
+     inkscape:cx="-9.4452982"
+     inkscape:cy="13.716602"
+     inkscape:window-x="419"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg7576" /><path
+     id="refresh-3-icon"
+     d="m 30.300859,4.514993 -3.492225,3.492319 c -1.896011,-1.89592 -4.514996,-3.0684 -7.407902,-3.0684 -5.785908,0 -10.476301,4.692551 -10.476301,10.47855 0,0.0015 0,-0.0015 0,0 l 4.069699,0 L 6.493596,21.915466 0,15.417462 l 3.985517,0 c 0,-8.32e-4 0,5.79e-4 0,0 C 3.985517,6.903828 10.887189,0 19.400732,0 c 4.256724,0 8.110623,1.725393 10.900127,4.514993 z m 8.322487,10.364183 -6.493596,-6.498099 -6.500533,6.498099 4.069698,0 c 0,0.0015 0,-0.0015 0,0 0,5.785999 -4.690392,10.47855 -10.4763,10.47855 -2.892906,0 -5.511983,-1.172576 -7.407902,-3.0684 l -3.492225,3.492319 c 2.789692,2.7896 6.643495,4.514993 10.900127,4.514993 8.513448,0 15.415215,-6.903828 15.415215,-15.417371 0,-5.78e-4 0,8.32e-4 0,0 l 3.985516,0 z"
+     inkscape:connector-curvature="0"
+     style="fill:#ffffff" /></svg>

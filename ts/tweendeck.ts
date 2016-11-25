@@ -1,6 +1,7 @@
 export interface TweenDeckOptions{
   allowSkip?:boolean;
   tweenFirst?:boolean;
+  from?:number;
 }
 export class TweenDeck{
   private positions:Array<number>;
@@ -9,12 +10,21 @@ export class TweenDeck{
   private options:TweenDeckOptions;
   private tl:TimelineMax;
   constructor(tl:TimelineMax, options?:TweenDeckOptions){
-    this.options       = Object.assign({},<TweenDeckOptions>{allowSkip:true,tweenFirst:true},options);
+    this.options       = Object.assign({},<TweenDeckOptions>{allowSkip:true,tweenFirst:true,from:0},options);
     this.positionIndex = 1;
     this.timeScale     = 0;
     this.tl            = tl;
     this.positions     = (<TimelineMax[]>tl.getChildren(false)).map(timeline=>timeline.startTime());
     this.positions.push(tl.duration());
+
+    tl.seek(options.from);
+    for(let i = 0; i < this.positions.length; i++){
+      if(this.positions[i] > options.from){
+        this.positionIndex = i;
+        tl.tweenTo(this.positions[i]);
+        break;
+      }
+    }
     if(this.options.tweenFirst)
       tl.tweenTo(this.positions[1]);
 

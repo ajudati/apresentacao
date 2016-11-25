@@ -1,0 +1,54 @@
+#modelonegocio{
+	.shadow{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		background:none;
+		z-index: 0;
+	}
+	main{
+		.icons{
+		}
+		h2{
+			font-weight: $regular;
+			@extend .grow;
+			text-align: center;
+			margin-top: -50px;
+		}
+	}
+	.icon{
+		width: 128px;
+		@extend .grow;
+		text-align:center;
+		img{
+			max-width: 80%;
+		}
+	}
+	.mirror{
+		transform:scaleY(-1);
+		overflow:hidden;
+    img,svg{
+      padding-left:10px;
+      padding-right:10px;
+      -webkit-mask-image: -webkit-gradient(linear, left bottom, left top, 
+        color-stop(0.00, rgba(0,0,0,0.2)), 
+        color-stop(0.35, rgba(0,0,0,0.0)), 
+        color-stop(1.00, rgba(0,0,0,0)));
+      -webkit-mask-position: 0px 0px;
+      -webkit-mask-repeat:no-repeat;
+      mask-image: -webkit-gradient(linear, left bottom, left top, 
+        color-stop(0.00, rgba(0,0,0,0.3)), 
+        color-stop(0.35, rgba(0,0,0,0.0)), 
+        color-stop(1.00, rgba(0,0,0,0)));
+    }
+	}
+}
+#modelonegocio-shadow{
+	width: 100%;
+	height: 60%;
+	top:40%;
+	position: absolute;
+	left:0;
+	background:rgba(0,0,0,0.5);
+
+}

@@ -1,0 +1,58 @@
+#publicoalvo-mas{
+	position:absolute;
+	left:30px;
+	top:30px;
+	font-weight: $regular;
+}
+#publicoalvo-afinal{
+	position:absolute;
+	bottom:30px;
+	right:30px;
+	font-weight: $regular;
+}
+#publicoalvo{
+	h2{
+		text-align: center;
+	}
+	h1{
+    margin-bottom:0px;
+    margin-top:0px;
+  }
+  .text{
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .top{
+    margin-bottom: 5px;
+    box-shadow:2px 2px 4px rgba(0,0,0,0.5);
+    border-radius:5px;
+  }
+  .header{
+    background: #cc00cc;
+    color:white;
+    border-radius:5px 5px 0px 0px;
+  }
+  .body{
+    background: #dc7ad7;
+    color:#4f164c;
+    //height: 50px;
+    // height: 100%;
+    border-radius:0px 0px 5px 5px;
+  }
+}
+#publicoalvo-left{
+	#ajudados-gifs{
+    width:400px;
+    img{
+      height:100px;
+    }
+  }
+}
+#publicoalvo-right{
+	img{
+		width: 50vmin;
+	}
+}
+#publicoalvo-items{
+	margin: 100px 20px 50px 20px;
+}

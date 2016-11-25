@@ -1,18 +1,28 @@
-.problema-circle{
-  width:16vmin;
-  height:16vmin;
-  @extend .flex, .acenter, .jcenter;
-}
 .problema-item-line{
   height:40px;
 }
 .problema-item{
   @extend .grow, .flex, .col, .acenter;
+  header{
+    @extend .tcenter, .grow;
+
+  }
+  .problema-item-icon{
+    width:16vmin;
+    height:16vmin;
+    @extend .flex, .acenter, .jcenter;
+  }
   img{
-    transform:scale(0.5vh);
+    width:auto;
+    height:auto;
+    max-width:60%;
+    max-height:60%;
   }
 }
 .problema-items{
   padding-left: 10px;
   padding-right: 10px;
+}
+#problema-backbone{
+  width: 100%;
 }

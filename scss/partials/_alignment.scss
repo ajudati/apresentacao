@@ -28,9 +28,21 @@
 .grow{
   flex:1;
 }
+.tleft{
+  text-align: left;
+}
+.tcenter{
+  text-align: center;
+}
+.tright{
+  text-align: right;
+}
 .margin-1{
   margin: 1vmin;
 }
 .padding-1{
   padding: 2vmin;
+}
+.pos-abs{
+  position: absolute;
 }

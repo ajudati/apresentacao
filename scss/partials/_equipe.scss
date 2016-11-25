@@ -1,0 +1,24 @@
+#equipe{
+	.foto{
+		margin: 5px;
+		border-radius:50%;
+		display: flex;
+		justify-content:center;
+		align-items: center;
+		div{
+			border-radius:50%;
+			//border: 5px solid white;
+			flex:1;
+			display: flex;
+			justify-content:center;
+			align-items: center;
+			box-shadow: 2px 2px 4px black;
+		}
+	}
+
+	img{
+		width: 100%;
+		border-radius:50%;
+	}
+
+}

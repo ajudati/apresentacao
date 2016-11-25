@@ -1,0 +1,22 @@
+.mercado-items{
+	justify-content:space-between;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#mercado-middle{
+	background: rgba(0,0,0,0.4);
+  height: 200px;
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid white;
+  border-right:none;
+  border-left:none;
+  padding: 0 30px;
+}
+#mercado-abes{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  text-align: right;
+  line-height: 1em;
+}

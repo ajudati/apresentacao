@@ -1,0 +1,38 @@
+#diferenciais{
+	
+	.diferenciais-item{
+		margin-top: 10px;
+		background:#b891ff;
+		color:#32008d;
+		.icon{
+			width: 70px;
+			height: 70px;
+			background:#5b00ff;
+			display: flex;
+			justify-content:center;
+			align-items:center;
+			img{
+				max-width: 80%;
+				max-height: 80%;
+			}
+		}
+		.description{
+			display: flex;
+			justify-content:center;
+			align-items:center;
+			padding:5px;
+		}
+	}
+	#diferenciais-right .diferenciais-item{
+		justify-content:flex-end;
+	}
+}
+
+#diferencials-middle{
+	& > img{
+		width: 155px;
+	}
+	.photo{
+		width: 150px;
+	}
+} 

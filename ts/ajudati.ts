@@ -3,44 +3,25 @@ import {LineChart} from './chart';
 import {position, Slide, SlideConf, SlideEffect, SlideEffectType, renderSlides, renderSlideEffect} from './slide';
 
 enum ATISlides{
-  Problema = 0,
+  App      = 0,
+  Problema,
+  Qualidades,
   Mercado,
   Domestico,
   PublicoAlvo,
   Solucoes,
-  RedesSociais,
-  Qualidades,
   AjudaTI,
   GerenciarChamados,
   ProcurarAjudantes,
   ProcurarServico,
   Conversacao,
   Diferenciais,
+  // RedesSociais,
   ModeloNegocio,
   Inovacao,
   Equipe,
   Obrigado
 }
-
-let slidesNames = [
-  "problema",
-  "mercado",
-  "domestico",
-  "publicoalvo",
-  "solucoes",
-  "redessociais",
-  "qualidades",
-  "ajudati",
-  "gerenciarchamados",
-  "procurarajudantes",
-  "procurarservico",
-  "conversacao",
-  "diferenciais",
-  "modelonegocio",
-  "inovacao",
-  "equipe", 
-  "obrigado"
-];
 
 enum ColorNames{
   DarkPurple = 0,
@@ -71,11 +52,30 @@ let colors:string[] = [
 '#ffffff'
 ];
 
+// {
+//   name:"redessociais",
+//   bgColor:colors[ColorNames.DarkRed],
+//   titleColor:colors[ColorNames.White],
+//   fgColor:colors[ColorNames.White]
+// },
+
 let slidesConf:SlideConf[] = [
+  {
+    name:"App",
+    bgColor:colors[ColorNames.DarkPurple],
+    titleColor:colors[ColorNames.LightPurple],
+    fgColor:colors[ColorNames.White]
+  },
   {
     name:"problema",
     bgColor:colors[ColorNames.DarkPurple],
     titleColor:colors[ColorNames.LightPurple],
+    fgColor:colors[ColorNames.White]
+  },
+  {
+    name:"qualidades",
+    bgColor:colors[ColorNames.Purple],
+    titleColor:colors[ColorNames.White],
     fgColor:colors[ColorNames.White]
   },
   {
@@ -103,20 +103,8 @@ let slidesConf:SlideConf[] = [
     fgColor:colors[ColorNames.White]
   },
   {
-    name:"redessociais",
-    bgColor:colors[ColorNames.DarkRed],
-    titleColor:colors[ColorNames.White],
-    fgColor:colors[ColorNames.White]
-  },
-  {
-    name:"qualidades",
-    bgColor:colors[ColorNames.Purple],
-    titleColor:colors[ColorNames.White],
-    fgColor:colors[ColorNames.White]
-  },
-  {
     name:"ajudati",
-    bgColor:colors[ColorNames.DarkYellow],
+    bgColor:colors[ColorNames.Purple],
     titleColor:colors[ColorNames.White],
     fgColor:colors[ColorNames.White]
   },
@@ -243,126 +231,220 @@ function getBasicOutEffects(i:number, titleOrientation:Orientation, linePosition
 let slides:Slide[] = [
   {
     conf:slidesConf[0],
-    inEffects:getBasicSlideEffects(0,SlideEffectType.From,Orientation.Top,0,[0.5,1]).concat([
-      getBorderColorEffect(0,0)
-    ]),
+    inEffects:[
+      {object:"#app",type:SlideEffectType.To,   duration:0, vars:{display:'flex'},position:0},
+      {object:"#app",type:SlideEffectType.From, duration:0.5, vars:{opacity:0},position:0},
+    ],
     outEffects:[
-    ].concat(getBasicOutEffects(0,Orientation.Top,0,0.5))
-  },{
-    conf:slidesConf[1],
-    inEffects:getBasicSlideEffects(1,SlideEffectType.From,Orientation.Left,0.5,[1,1.5]).concat([
-    ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(1,Orientation.Left,0,0.5))
+      {object:"#app",type:SlideEffectType.To, duration:0.5, vars:{opacity:0},position:0},
+      {object:"#app",type:SlideEffectType.To, duration:0, vars:{display:'none'},position:0.5},
+    ],
   },
   {
-    conf:slidesConf[2],
-    inEffects:getBasicSlideEffects(2,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
+    conf:slidesConf[ATISlides.Problema],
+    inEffects:getBasicSlideEffects(ATISlides.Problema,SlideEffectType.From,Orientation.Top,0,[0.5,1]).concat([
+      getBorderColorEffect(ATISlides.Problema,0),
+      {object:"#problema-backbone"      ,type:SlideEffectType.From, duration:10,vars:{width:'0%'},position:1},
+      {object:"#problema-indisponivel"  ,type:SlideEffectType.From, duration:1, vars:{opacity:0,scale:0,ease:Elastic.easeOut.config(1,0.3)},position:2.4},
+      {object:"#problema-desconfortavel",type:SlideEffectType.From, duration:1, vars:{opacity:0,scale:0,ease:Elastic.easeOut.config(1,0.3)},position:4},
+      {object:"#problema-dificil"       ,type:SlideEffectType.From, duration:1, vars:{opacity:0,scale:0,ease:Elastic.easeOut.config(1,0.3)},position:6},
     ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(2,Orientation.Top,0,0.5))
+    outEffects:(<SlideEffect[]>[
+      {object:"#problema-indisponivel"  ,type:SlideEffectType.To, duration:1, vars:{opacity:0,scale:0,ease:Elastic.easeOut.config(1,0.3)},position:0},
+      {object:"#problema-desconfortavel",type:SlideEffectType.To, duration:1, vars:{opacity:0,scale:0,ease:Elastic.easeOut.config(1,0.3)},position:0},
+      {object:"#problema-dificil"       ,type:SlideEffectType.To, duration:1, vars:{opacity:0,scale:0,ease:Elastic.easeOut.config(1,0.3)},position:0},
+      {object:"#problema-backbone"      ,type:SlideEffectType.To, duration:1, vars:{opacity:0},position:1}
+    ]).concat(getBasicOutEffects(ATISlides.Problema,Orientation.Top,0,0.5))
   },
   {
-    conf:slidesConf[3],
-    inEffects:getBasicSlideEffects(3,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
+    conf:slidesConf[ATISlides.Qualidades],
+    inEffects:getBasicSlideEffects(ATISlides.Qualidades,SlideEffectType.From,Orientation.Top,0.5,[2,2.5]).concat([
+      {object:"#qualidades .shadow"      ,type:SlideEffectType.From, duration:0.5,vars:{height:'0px'},position:2.5},
+      {object:".qualidades-text"         ,type:SlideEffectType.From, duration:0.5,vars:{opacity:0},position:2.5},
+      {object:".qualidades-img"          ,type:SlideEffectType.From, duration:0.5,vars:{opacity:0},position:2.5},
     ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(3,Orientation.Top,0,0.5))
+    outEffects:(<SlideEffect[]>[
+      {object:"#qualidades .shadow"      ,type:SlideEffectType.To, duration:0.5,vars:{height:'0px'},position:0},
+      {object:".qualidades-text"         ,type:SlideEffectType.To, duration:0.5,vars:{opacity:0},position:0},
+      {object:".qualidades-img"         ,type:SlideEffectType.To, duration:0.5,vars:{opacity:0},position:0},
+    ]).concat(getBasicOutEffects(ATISlides.Qualidades,Orientation.Top,0,0.5))
   },
   {
-    conf:slidesConf[4],
-    inEffects:getBasicSlideEffects(4,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
+    conf:slidesConf[ATISlides.Mercado],
+    inEffects:getBasicSlideEffects(ATISlides.Mercado,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
+      {object:"#mercado"  ,type:SlideEffectType.From, duration:0.5,vars:{opacity:0},position:1.5},
+      {object:"#mercado-middle"  ,type:SlideEffectType.From, duration:0.5,vars:{opacity:0},position:1.5},
+      {object:"#mercado-middle"  ,type:SlideEffectType.From, duration:0.5,vars:{height:'0px'},position:2},
     ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(4,Orientation.Top,0,0.5))
+    outEffects:(<SlideEffect[]>[
+      {object:"#mercado-middle"  ,type:SlideEffectType.To, duration:0.5,vars:{height:'0px'},position:0},
+      {object:"#mercado"         ,type:SlideEffectType.To, duration:0.5,vars:{opacity:0},position:0.5},
+    ]).concat(getBasicOutEffects(ATISlides.Mercado,Orientation.Top,0,0.5))
   },
   {
-    conf:slidesConf[5],
-    inEffects:getBasicSlideEffects(5,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
+    conf:slidesConf[ATISlides.Domestico],
+    inEffects:getBasicSlideEffects(ATISlides.Domestico,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
+      {object:"#domestico-left"           ,type:SlideEffectType.From, duration:0.75,vars:{opacity:0},position:1.5},
+      {object:"#domestico-empresarial h1" ,type:SlideEffectType.From,   duration:1,vars:{marginLeft:'-170px'},position:1.5},
     ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(5,Orientation.Top,0,0.5))
+    outEffects:[]
   },
   {
-    conf:slidesConf[6],
-    inEffects:getBasicSlideEffects(6,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
-    ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(7,Orientation.Top,0,0.5))
+    conf:null,
+    inEffects:[
+      {object:"#domestico-domestico h1"    ,type:SlideEffectType.From,   duration:1,vars:{marginLeft:'-170px'},position:0.5},
+      {object:"#domestico-domestico .icon" ,type:SlideEffectType.From,   duration:1,vars:{opacity:0},position:0.5},
+      {object:"#domestico-right" ,type:SlideEffectType.From,   duration:1,vars:{opacity:0},position:0.5},
+    ],
+    outEffects:(<SlideEffect[]>[
+      {object:"#domestico" ,type:SlideEffectType.To,   duration:1,vars:{opacity:0},position:0.5},
+    ]).concat(getBasicOutEffects(ATISlides.Domestico,Orientation.Top,0,0.5))
   },
   {
-    conf:slidesConf[7],
-    inEffects:getBasicSlideEffects(7,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
-    ]),
+    conf:null,
+    inEffects:[
+      getSlideShowEffect(ATISlides.PublicoAlvo),
+      getBgEffect(ATISlides.PublicoAlvo,1),
+      {object:"#publicoalvo-chamada" ,type:SlideEffectType.To,   duration:0,vars:{display:'flex'},position:0.5},
+      {object:"#publicoalvo-chamada" ,type:SlideEffectType.From, duration:1,vars:{opacity:0},     position:1.5},
+    ],
     outEffects:[
-    ].concat(getBasicOutEffects(7,Orientation.Top,0,0.5))
+      {object:"#publicoalvo-chamada" ,type:SlideEffectType.To,   duration:1,vars:{opacity:0},position:0},
+      {object:"#publicoalvo-chamada" ,type:SlideEffectType.To,   duration:1,vars:{display:'none'},position:1},
+    ]
+  },
+  {
+    conf:slidesConf[ATISlides.PublicoAlvo],
+    inEffects:[
+      getLineColorEffect(ATISlides.PublicoAlvo,1),
+      getTitleColorEffect(ATISlides.PublicoAlvo,1),
+      getTitleEffect(ATISlides.PublicoAlvo,40,SlideEffectType.From, Orientation.Top),
+      getLineEffect(ATISlides.PublicoAlvo,SlideEffectType.From, Orientation.Top),
+      {object:"#publicoalvo-conteudo" ,type:SlideEffectType.To,   duration:1,vars:{display:'flex'},position:2},
+      {object:"#publicoalvo-conteudo" ,type:SlideEffectType.From,   duration:1,vars:{opacity:0},position:2},
+      {object:"#publicoalvo-left"     ,type:SlideEffectType.From,   duration:1,vars:{opacity:0, scale:0.1, ease:Elastic.easeOut.config(1,0.3)},position:2.5},
+      {object:"#publicoalvo-right"    ,type:SlideEffectType.From,   duration:1,vars:{opacity:0, scale:0.1, ease:Elastic.easeOut.config(1,0.3)},position:2.5},
+    ],
+    outEffects:(<SlideEffect[]>[
+      {object:"#publicoalvo-left"     ,type:SlideEffectType.To,   duration:1,vars:{opacity:0, scale:0.1, ease:Elastic.easeOut.config(1,0.3)},position:0},
+      {object:"#publicoalvo-right"    ,type:SlideEffectType.To,   duration:1,vars:{opacity:0, scale:0.1, ease:Elastic.easeOut.config(1,0.3)},position:0},
+    ]).concat(getBasicOutEffects(ATISlides.PublicoAlvo,Orientation.Top,0,0.5))
+  },
+  {
+    conf:slidesConf[ATISlides.Solucoes],
+    inEffects:getBasicSlideEffects(ATISlides.Solucoes,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
+      {object:"#content-solucoes-shadow1"     ,type:SlideEffectType.From,   duration:0.75,vars:{opacity:0},position:1.7},
+      {object:"#solucoes-logos img"           ,type:SlideEffectType.From,   duration:3,vars:{css:{marginBottom:'-21vw'}},position:2},
+      {object:"#content-solucoes .mirror img" ,type:SlideEffectType.From,   duration:3,vars:{css:{marginBottom:'-20vw',webkitMaskPosition:"0px -14.5vw"}},position:2},
+      {object:"#solucoes-problemas"           ,type:SlideEffectType.From,   duration:0.75,vars:{opacity:0},position:3},
+      // sSolucoes.from("#content-solucoes-shadow1",0.75,{opacity:0},1.7);
+      // sSolucoes.from("#solucoes-logos img",3,{css:{marginBottom:'-21vw'}},2);
+      // sSolucoes.from("#content-solucoes .mirror img",3,{css:{marginBottom:'-20vw',webkitMaskPosition:"0px -14.5vw"}},"-=3");
+      // sSolucoes.from("#solucoes-problemas",0.75,{opacity:0});
+    ]),
+    outEffects:(<SlideEffect[]>[
+      {object:"#content-solucoes"             ,type:SlideEffectType.To,   duration:0.75,vars:{opacity:0},position:0},
+      {object:"#solucoes-subtitle"             ,type:SlideEffectType.To,   duration:0.75,vars:{opacity:0},position:0},
+      {object:"#solucoes-problemas"             ,type:SlideEffectType.To,   duration:0.75,vars:{opacity:0},position:0},
+    ]).concat(getBasicOutEffects(ATISlides.Solucoes,Orientation.Top,0,0.5))
+  },
+  {
+    conf:slidesConf[ATISlides.AjudaTI],
+    inEffects:getBasicSlideEffects(ATISlides.AjudaTI,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
+      {object:"#ajudati h1"             ,type:SlideEffectType.From,   duration:0.75,vars:{opacity:0},position:1.5},
+    ]),
+    outEffects:(<SlideEffect[]>[
+      {object:"#ajudati h1"             ,type:SlideEffectType.To,   duration:0.75,vars:{opacity:0},position:0},
+    ]).concat(getBasicOutEffects(ATISlides.AjudaTI,Orientation.Top,0,0.5))
   },
   {
     conf:slidesConf[8],
     inEffects:getBasicSlideEffects(8,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
     ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(8,Orientation.Top,0,0.5))
+    outEffects:(<SlideEffect[]>[
+    ]).concat(getBasicOutEffects(8,Orientation.Top,0,0.5))
   },
   {
     conf:slidesConf[9],
     inEffects:getBasicSlideEffects(9,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
     ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(9,Orientation.Top,0,0.5))
+    outEffects:(<SlideEffect[]>[
+    ]).concat(getBasicOutEffects(9,Orientation.Top,0,0.5))
   },
   {
     conf:slidesConf[10],
     inEffects:getBasicSlideEffects(10,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
     ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(10,Orientation.Top,0,0.5))
+    outEffects:(<SlideEffect[]>[
+    ]).concat(getBasicOutEffects(10,Orientation.Top,0,0.5))
   },
   {
     conf:slidesConf[11],
     inEffects:getBasicSlideEffects(11,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
     ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(11,Orientation.Top,0,0.5))
+    outEffects:(<SlideEffect[]>[
+    ]).concat(getBasicOutEffects(11,Orientation.Top,0,0.5))
   },
   {
     conf:slidesConf[12],
     inEffects:getBasicSlideEffects(12,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
     ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(12,Orientation.Top,0,0.5))
+    outEffects:(<SlideEffect[]>[
+    ]).concat(getBasicOutEffects(12,Orientation.Top,0,0.5))
   },
   {
     conf:slidesConf[13],
     inEffects:getBasicSlideEffects(13,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
     ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(13,Orientation.Top,0,0.5))
+    outEffects:(<SlideEffect[]>[
+    ]).concat(getBasicOutEffects(13,Orientation.Top,0,0.5))
   },
   {
     conf:slidesConf[14],
     inEffects:getBasicSlideEffects(14,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
     ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(14,Orientation.Top,0,0.5))
+    outEffects:(<SlideEffect[]>[
+    ]).concat(getBasicOutEffects(14,Orientation.Top,0,0.5))
   },
   {
     conf:slidesConf[15],
     inEffects:getBasicSlideEffects(15,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
     ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(15,Orientation.Top,0,0.5))
+    outEffects:(<SlideEffect[]>[
+    ]).concat(getBasicOutEffects(15,Orientation.Top,0,0.5))
   },
   {
     conf:slidesConf[16],
     inEffects:getBasicSlideEffects(16,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
     ]),
-    outEffects:[
-    ].concat(getBasicOutEffects(16,Orientation.Top,0,0.5))
-  }
+    outEffects:(<SlideEffect[]>[
+    ]).concat(getBasicOutEffects(16,Orientation.Top,0,0.5))
+  },
+  //   conf:slidesConf[17],
+  //   inEffects:getBasicSlideEffects(17,SlideEffectType.From,Orientation.Top,0.5,[1,1.5]).concat([
+  //   ]),
+  //   outEffects:(<SlideEffect[]>[
+  //   ]).concat(getBasicOutEffects(17,Orientation.Top,0,0.5))
+  // }
 ];
 
 var tl:TimelineMax = new TimelineMax();
 renderSlides(slides,tl);
-var deck = new TweenDeck(tl);
+var deck = new TweenDeck(tl,{tweenFirst:true,from:0});
+
 console.log(deck);
+
+function hideApp(){
+  let obj = document.getElementById('app');
+  TweenMax.to(obj,1,{opacity:0, onComplete:()=>obj.style.display='none'});
+}
+function showApp(){
+  let obj = document.getElementById('app');
+  obj.style.display='flex';
+  TweenMax.to(obj,1,{opacity:1});
+}
+function reloadApp(){
+  let obj = (<HTMLIFrameElement>document.getElementById('app-iframe'));
+  obj.src = obj.src;//.f.src = f.src;contentWindow.location.reload();
+}
+console.log(reloadApp,hideApp,showApp);

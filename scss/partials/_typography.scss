@@ -12,5 +12,8 @@ $h-font-factors:1.6,1.3,1.2,1.1,1.0,0.9;
 @for $i from 1 through 6{
   h#{$i}{
     font-size:$base-font-size * nth($h-font-factors,$i);
+    &.big{
+    	font-size:$base-font-size * nth($h-font-factors,$i) * 1.5;
+    }
   }
 }
